@@ -26,9 +26,12 @@
 main {
   background-color: #EFF0D1;
   color: #29335C;
-  max-width: 600px;
-  min-width: 600px;
+  width: 100vw;
   height: 100vh;
+
+  @media (min-width: 600px) {
+    min-width: 600px;
+  }
 
   .header-section {
     display: flex;
