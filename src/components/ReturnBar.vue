@@ -8,7 +8,11 @@ const emitIndex = (index) => {
 </script>
 
 <template>
-  <div @click="emitIndex(0)" class="return-bar">
+  <div
+    @click="emitIndex(0)" 
+    @touchend.prevent="emitIndex(0)"
+    class="return-bar"
+  >
     <span>^</span>
   </div>
 </template>
