@@ -1,9 +1,4 @@
 <script setup>
-const emits = defineEmits(['scroll-to-section']);
-
-const emitIndex = (index) => {
-  emits('scroll-to-section', index);
-};
 </script>
 
 <template>
@@ -11,27 +6,12 @@ const emitIndex = (index) => {
     <div class="content-wrapper">
       <div class="header-section" >
         <div class="header-text">
-          Jack Sisson
+          Engineering
         </div>
       </div>
       <div class="menu-section">
-        <div
-          @click="emitIndex(1)"
-          @touchend.prevent="emitIndex(1)"
-          class="menu-item">
-          Photography
-        </div>
-        <div 
-          @click="emitIndex(2)"
-          @touchend.prevent="emitIndex(2)"
-          class="menu-item">
-          Engineering
-        </div>
-        <div
-          @click="emitIndex(3)"
-          @touchend.prevent="emitIndex(3)"
-          class="menu-item">
-          Blog
+        <div class="menu-item">
+          Coming Soon :)
         </div>
       </div>
     </div>
@@ -40,8 +20,8 @@ const emitIndex = (index) => {
 
 <style scoped>
 main {
-  background-color: #EFF0D1;
-  color: #29335C;
+  background-color: #D6EEFF;
+  color: #3E442B;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -55,12 +35,11 @@ main {
       max-width: 600px;
     }
 
-
     .header-section {
       display: flex;
       justify-content: left;
       align-items: center;
-      margin-top: 100px;
+      margin-top: 50px;
 
       .header-text {
         font-size: 48px;
@@ -80,15 +59,8 @@ main {
         font-size: 24px;
         font-weight: 600;
         margin: 30px;
-        transition: font-size 0.3s ease-in-out;
-        cursor: pointer;
-
-        &:hover, &.touched {
-          font-size: 30px;
-        }
       }
     }
   }
-
 }
 </style>
