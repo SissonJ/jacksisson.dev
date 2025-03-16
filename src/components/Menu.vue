@@ -40,7 +40,7 @@ const emitIndex = (index) => {
 
 <style scoped>
 main {
-  background-color: #EFF0D1;
+  background-color: #F2E8CF;
   color: #29335C;
   width: 100vw;
   height: 100vh;

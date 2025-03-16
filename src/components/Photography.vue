@@ -37,7 +37,7 @@ const movePhotoBackward = () => {
 
 
 onMounted(() => {
-  index.value = Math.floor((Math.random() * 100) + 1);
+  index.value = Math.floor((Math.random() * 100) + 1) % photos.length;
   const img = new Image();
   img.src = photos[index.value % photos.length].src;
   img.onload = () => {
