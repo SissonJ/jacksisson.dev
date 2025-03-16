@@ -26,7 +26,6 @@ const currentIndex = ref(0);
 
 // Scroll to a specific section
 watch(currentIndex, (index) => {
-  console.log(sectionRefs.value);
   if (sectionRefs.value[index]) {
     sectionRefs.value[index].scrollIntoView({ behavior: "smooth" });
   }
@@ -81,7 +80,6 @@ const getComponent = (title) => {
 };
 
 const emitHandler = (index) => {
-  console.log('HERE');
   currentIndex.value = index;
 };
 

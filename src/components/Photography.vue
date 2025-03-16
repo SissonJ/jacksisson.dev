@@ -1,6 +1,53 @@
 <script setup>
-</script>
+import {Photos} from '@/lib/photos';
+import { onMounted, ref } from 'vue';
 
+const index = ref(0);
+
+const currentPhoto = ref(null);
+
+const photos = Object.values(Photos).map(photo => {
+  return {
+    src: new URL(photo, 'https://jacksisson.dev/api/photo/'),
+  };
+});
+
+
+const movePhotoForward = () => {
+  index.value = (index.value + 1) % photos.length;
+  currentPhoto.value = photos[index.value].src;
+  const next = new Image();
+  next.src = photos[(index.value + 1) % photos.length].src;
+};
+
+const movePhotoBackward = () => {
+  index.value = (index.value - 1) % photos.length;
+  if (index.value === -1) {
+    index.value = photos.length - 1;
+  }
+  currentPhoto.value = photos[index.value].src;
+  if (index.value !== 0) {
+    const next = new Image();
+    next.src = photos[index.value - 1 % photos.length].src;
+  } else {
+    const next = new Image();
+    next.src = photos[photos.length - 1].src;
+  }
+};
+
+
+onMounted(() => {
+  index.value = Math.floor((Math.random() * 100) + 1);
+  const img = new Image();
+  img.src = photos[index.value % photos.length].src;
+  img.onload = () => {
+    currentPhoto.value = img.src;
+  };
+  const next = new Image();
+  next.src = photos[index.value + 1 % photos.length].src;
+});
+
+</script>
 <template>
   <main>
     <div class="content-wrapper">
@@ -9,10 +56,16 @@
           Photography
         </div>
       </div>
-      <div class="menu-section">
-        <div class="menu-item">
-          Coming Soon :)
-        </div>
+      <div class="photography-section">
+        <div class="scroll-button" 
+          @click="movePhotoBackward"
+          @touchend.prevent="movePhotoBackward"
+        > O </div>
+        <img :src="currentPhoto">
+        <div class="scroll-button" 
+          @click="movePhotoForward"
+          @touchend.prevent="movePhotoForward"
+        > O </div>
       </div>
     </div>
   </main>
@@ -39,7 +92,7 @@ main {
       display: flex;
       justify-content: left;
       align-items: center;
-      margin-top: 50px;
+      padding: 50px 10px 0;
 
       .header-text {
         font-size: 48px;
@@ -48,18 +101,31 @@ main {
       }
     }
 
-    .menu-section {
+    .photography-section {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: left;
-      margin-top: 20px;
+      align-items: center;
+      background-color: #5B85AA;
+      padding: 20px 0;
+      border-radius: 10px;
+      max-height: 38vh;
 
-      .menu-item {
+      .scroll-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
         font-size: 24px;
         font-weight: 600;
-        margin: 30px;
-        transition: font-size 0.3s ease-in-out;
+        margin: 0 5px;
+        color: #D7D9B1;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        max-width: 85%;
+        object-fit: cover;
       }
     }
   }
